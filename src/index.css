@@ -78,6 +78,8 @@ body
     justify-content: center;
 
     width: 100%;
+    height: calc(100% - 70px);
+    min-height: 500px;
 
     /* border: 1px solid blueviolet; */
 }
