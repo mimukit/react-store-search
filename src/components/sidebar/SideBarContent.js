@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const renderItems = items => {
   return items.map((item, i) => (
@@ -21,5 +22,9 @@ const SideBarContent = ({ cartItems }) =>
       <p>You have no item on your cart</p>
     </div>
   );
+
+SideBarContent.propTypes = {
+  cartItems: PropTypes.array.isRequired,
+};
 
 export default SideBarContent;

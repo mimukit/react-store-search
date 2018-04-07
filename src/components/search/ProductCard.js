@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ProductCard = ({ title, price, image, addToCart }) => (
   <div className="product-card">
@@ -23,5 +24,12 @@ const ProductCard = ({ title, price, image, addToCart }) => (
     </div>
   </div>
 );
+
+ProductCard.propTypes = {
+  title: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  image: PropTypes.string.isRequired,
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default ProductCard;

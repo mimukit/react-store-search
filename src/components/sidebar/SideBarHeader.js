@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const SideBarHeader = ({ cartItems, clearCart }) => (
   <div className="sidebar-header">
@@ -12,5 +13,10 @@ const SideBarHeader = ({ cartItems, clearCart }) => (
     </p>
   </div>
 );
+
+SideBarHeader.propTypes = {
+  cartItems: PropTypes.array.isRequired,
+  clearCart: PropTypes.func.isRequired,
+};
 
 export default SideBarHeader;

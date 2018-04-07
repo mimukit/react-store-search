@@ -1,11 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ProductCard from './ProductCard';
 
 const renderProducts = (products, addToCart) => {
   return products.map(product => {
-    console.log(product);
-
     return (
       <ProductCard
         key={product._id}
@@ -43,6 +42,13 @@ const SearchResult = ({
       <p>Sorry, that thing doesn't seem to exist. Try anything else?</p>
     </div>
   );
+};
+
+SearchResult.propTypes = {
+  isSearchSubmitted: PropTypes.bool.isRequired,
+  searchResult: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  addToCart: PropTypes.func.isRequired,
 };
 
 export default SearchResult;

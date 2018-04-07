@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
@@ -35,7 +36,6 @@ class Search extends Component {
       isSearchSubmitted: true,
       isLoading: true,
     }));
-    console.log('Search Submit');
 
     this.requestData(this.state.searchText)
       .then(res =>
@@ -75,5 +75,9 @@ class Search extends Component {
     );
   }
 }
+
+Search.propTypes = {
+  addToCart: PropTypes.func.isRequired,
+};
 
 export default Search;
