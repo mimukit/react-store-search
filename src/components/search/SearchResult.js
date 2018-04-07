@@ -1,54 +1,44 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import ProductCard from './ProductCard';
 
-const renderProducts = () => (
-  <div className="search-result">
-    <ProductCard
-      price="11.50"
-      image="https://images-na.ssl-images-amazon.com/images/I/5168%2ByKCPcL._UL900_.jpg"
-      title="Test Product"
-    />
+const renderProducts = products => {
+  return products.map(product => {
+    console.log(product);
 
-    <ProductCard
-      price="11.50"
-      image="https://images-na.ssl-images-amazon.com/images/I/5168%2ByKCPcL._UL900_.jpg"
-      title="Test Product"
-    />
-
-    <ProductCard
-      price="11.50"
-      image="https://images-na.ssl-images-amazon.com/images/I/5168%2ByKCPcL._UL900_.jpg"
-      title="Test Product"
-    />
-
-    <ProductCard
-      price="11.50"
-      image="https://images-na.ssl-images-amazon.com/images/I/5168%2ByKCPcL._UL900_.jpg"
-      title="Test Product"
-    />
-  </div>
-);
-
-class SearchResult extends Component {
-  state = { loading: false, searchResult: [1] };
-  render() {
-    return this.props.isNoSearchYet ? (
-      <div className="search-result-empty">
-        <p>What'll you buy today?</p>
-      </div>
-    ) : this.state.loading ? (
-      <div className="search-result-empty">
-        <p>Loading...</p>
-      </div>
-    ) : this.state.searchResult.length > 0 ? (
-      renderProducts()
-    ) : (
-      <div className="search-result-empty">
-        <p>Sorry, that thing doesn't seem to exist. Try anything else?</p>
-      </div>
+    return (
+      <ProductCard
+        key={product._id}
+        price={
+          typeof product._source.salePrice === 'number'
+            ? `$${product._source.salePrice / 100}`
+            : 'Unknown'
+        }
+        title={product._source.title}
+        image={
+          product._source.images[0] || 'https://via.placeholder.com/150x150'
+        }
+      />
     );
-  }
-}
+  });
+};
+
+const SearchResult = ({ isSearchSubmitted, searchResult, isLoading }) => {
+  return !isSearchSubmitted && searchResult.length === 0 ? (
+    <div className="search-result-empty">
+      <p>What'll you buy today?</p>
+    </div>
+  ) : isLoading ? (
+    <div className="search-result-empty">
+      <p>Loading...</p>
+    </div>
+  ) : searchResult.length > 0 ? (
+    <div className="search-result">{renderProducts(searchResult)}</div>
+  ) : (
+    <div className="search-result-empty">
+      <p>Sorry, that thing doesn't seem to exist. Try anything else?</p>
+    </div>
+  );
+};
 
 export default SearchResult;
