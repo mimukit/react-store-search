@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import TimeTravel from './TimeTravel';
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
 
@@ -61,10 +62,13 @@ class Search extends Component {
   render() {
     return (
       <section className="search-section">
-        <SearchBar
-          onSearchTextChange={this.onSearchTextChange}
-          onSearchSubmit={this.onSearchSubmit}
-        />
+        <div className="search-section-header">
+          <TimeTravel />
+          <SearchBar
+            onSearchTextChange={this.onSearchTextChange}
+            onSearchSubmit={this.onSearchSubmit}
+          />
+        </div>
         <SearchResult
           addToCart={this.props.addToCart}
           isSearchSubmitted={this.state.isSearchSubmitted}
