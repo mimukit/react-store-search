@@ -1,83 +1,49 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
+import TimeTravel from './TimeTravel';
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
 
-const initialState = {
-  searchText: '',
-  isSearchSubmitted: false,
-  searchResult: [],
-  isLoading: false,
-};
-
-class Search extends Component {
-  state = initialState;
-
-  onSearchTextChange = e => {
-    const inputValue = e.target.value;
-
-    if (this.state.isSearchSubmitted) {
-      this.setState(prevState => ({
-        isSearchSubmitted: false,
-      }));
-    }
-
-    this.setState(prevState => ({
-      searchText: inputValue,
-    }));
-  };
-
-  onSearchSubmit = () => {
-    if (this.state.isSearchSubmitted || this.state.searchText.length === 0) {
-      return;
-    }
-    this.setState(prevState => ({
-      isSearchSubmitted: true,
-      isLoading: true,
-    }));
-
-    this.requestData(this.state.searchText)
-      .then(res =>
-        this.setState(prevState => ({ searchResult: res.hits.hits })),
-      )
-      .catch(err => console.log(err))
-      .finally(() => this.setState(prevState => ({ isLoading: false })));
-  };
-
-  requestData = async searchText => {
-    console.log('Requesting data to server...');
-
-    const response = await fetch(
-      `http://es.backpackbang.com:9200/products/amazon/_search?q=title:${searchText}`,
-    );
-    const body = await response.json();
-
-    if (response.status !== 200) throw Error(body.message);
-
-    return body;
-  };
-
-  render() {
-    return (
-      <section className="search-section">
-        <SearchBar
-          onSearchTextChange={this.onSearchTextChange}
-          onSearchSubmit={this.onSearchSubmit}
-        />
-        <SearchResult
-          addToCart={this.props.addToCart}
-          isSearchSubmitted={this.state.isSearchSubmitted}
-          searchResult={this.state.searchResult}
-          isLoading={this.state.isLoading}
-        />
-      </section>
-    );
-  }
-}
+const Search = ({
+  searchText,
+  onSearchTextChange,
+  onSearchSubmit,
+  addToCart,
+  isSearchSubmitted,
+  searchResult,
+  isLoading,
+  prevSnapshot,
+  nextSnapshot,
+}) => (
+  <section className="search-section">
+    <div className="search-section-header">
+      <TimeTravel prevSnapshot={prevSnapshot} nextSnapshot={nextSnapshot} />
+      <SearchBar
+        searchText={searchText}
+        onSearchTextChange={onSearchTextChange}
+        onSearchSubmit={onSearchSubmit}
+      />
+    </div>
+    <SearchResult
+      addToCart={addToCart}
+      isSearchSubmitted={isSearchSubmitted}
+      searchResult={searchResult}
+      isLoading={isLoading}
+    />
+  </section>
+);
 
 Search.propTypes = {
+  searchText: PropTypes.string,
+  onSearchTextChange: PropTypes.func.isRequired,
+  onSearchSubmit: PropTypes.func.isRequired,
   addToCart: PropTypes.func.isRequired,
+  isSearchSubmitted: PropTypes.bool.isRequired,
+  searchResult: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  prevSnapshot: PropTypes.func.isRequired,
+  nextSnapshot: PropTypes.func.isRequired,
 };
 
 export default Search;

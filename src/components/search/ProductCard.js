@@ -27,7 +27,7 @@ const ProductCard = ({ title, price, image, addToCart }) => (
 
 ProductCard.propTypes = {
   title: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.number,
   image: PropTypes.string.isRequired,
   addToCart: PropTypes.func.isRequired,
 };
