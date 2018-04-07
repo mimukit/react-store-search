@@ -105,6 +105,7 @@ body {
 
   width: 27%;
   min-width: 200px;
+  height: 300px;
   margin: 25px auto;
 
   transition: 0.3s;
@@ -115,7 +116,6 @@ body {
 .product-card img {
   align-self: center;
 
-  width: 100%;
   width: 150px;
   height: 150px;
 }
@@ -126,10 +126,16 @@ body {
 
 .product-card-content {
   padding: 2px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
 }
 
 .product-card-content button {
   margin: 10px 0;
+  align-self: flex-start;
 }
 
 .product-card .price-tag {
