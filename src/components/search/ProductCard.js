@@ -10,9 +10,7 @@ const ProductCard = ({ title, price, image, addToCart }) => (
       <img src={image} alt={title} />
     </div>
     <div className="product-card-content">
-      <p>
-        <b>{title}</b>
-      </p>
+      <p>{title}</p>
       <button
         onClick={() => {
           addToCart({
