@@ -14,17 +14,40 @@ const initialState = {
 class App extends Component {
   state = initialState;
 
-  addToCart = item => {
-    this.setState(prevState => ({
-      cartItems: [...prevState.cartItems, item],
+  snapshots = [];
+
+  snapshotIndex = -1;
+
+  componentDidMount() {
+    this.addSnapshot();
+  }
+
+  // Snapshot Management Methods
+
+  addSnapshot = params => {
+    this.snapshots = [...this.snapshots, this.state];
+    this.snapshotIndex++;
+
+    console.log(this.snapshots, this.snapshotIndex);
+  };
+
+  prevSnapshot = params => {
+    this.snapshotIndex--;
+
+    this.setState(() => ({
+      ...this.snapshots[this.snapshotIndex],
     }));
   };
 
-  clearCart = () => {
-    this.setState(prevState => ({
-      cartItems: [],
+  nextSnapshot = params => {
+    this.snapshotIndex++;
+
+    this.setState(() => ({
+      ...this.snapshots[this.snapshotIndex],
     }));
   };
+
+  // App Management Methods
 
   onSearchTextChange = e => {
     const inputValue = e.target.value;
@@ -38,6 +61,24 @@ class App extends Component {
     this.setState(prevState => ({
       searchText: inputValue,
     }));
+  };
+
+  addToCart = item => {
+    this.setState(
+      prevState => ({
+        cartItems: [...prevState.cartItems, item],
+      }),
+      this.addSnapshot,
+    );
+  };
+
+  clearCart = () => {
+    this.setState(
+      prevState => ({
+        cartItems: [],
+      }),
+      this.addSnapshot,
+    );
   };
 
   onSearchSubmit = () => {
@@ -54,7 +95,9 @@ class App extends Component {
         this.setState(prevState => ({ searchResult: res.hits.hits })),
       )
       .catch(err => console.log(err))
-      .finally(() => this.setState(prevState => ({ isLoading: false })));
+      .finally(() =>
+        this.setState(prevState => ({ isLoading: false }), this.addSnapshot),
+      );
   };
 
   requestData = async searchText => {
@@ -74,12 +117,15 @@ class App extends Component {
     return (
       <section className="container">
         <Search
+          searchText={this.state.searchText}
+          isSearchSubmitted={this.state.isSearchSubmitted}
+          searchResult={this.state.searchResult}
           onSearchTextChange={this.onSearchTextChange}
           onSearchSubmit={this.onSearchSubmit}
           addToCart={this.addToCart}
-          isSearchSubmitted={this.state.isSearchSubmitted}
-          searchResult={this.state.searchResult}
           isLoading={this.state.isLoading}
+          prevSnapshot={this.prevSnapshot}
+          nextSnapshot={this.nextSnapshot}
         />
         <SideBar cartItems={this.state.cartItems} clearCart={this.clearCart} />
       </section>
