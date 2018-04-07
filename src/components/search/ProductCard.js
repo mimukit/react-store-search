@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 
 const ProductCard = ({ title, price, image, addToCart }) => (
   <div className="product-card">
-    <span className="price-tag">
-      {typeof price === 'number' ? `$${(price / 100).toFixed(2)}` : 'Unknown'}
-    </span>
-    <img src={image} alt={title} />
+    <div className="product-card-header">
+      <span className="price-tag">
+        {typeof price === 'number' ? `$${(price / 100).toFixed(2)}` : 'Unknown'}
+      </span>
+      <img src={image} alt={title} />
+    </div>
     <div className="product-card-content">
-      <h4>
-        <b>{title}</b>
-      </h4>
+      <p>{title}</p>
       <button
         onClick={() => {
           addToCart({

@@ -105,6 +105,7 @@ body {
 
   width: 27%;
   min-width: 200px;
+  height: 320px;
   margin: 25px auto;
 
   transition: 0.3s;
@@ -112,10 +113,14 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-.product-card img {
+.product-card-header {
+  align-self: center;
+  margin-bottom: 20px;
+}
+
+.product-card-header img {
   align-self: center;
 
-  width: 100%;
   width: 150px;
   height: 150px;
 }
@@ -126,10 +131,22 @@ body {
 
 .product-card-content {
   padding: 2px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+}
+
+.product-card-content p {
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-card-content button {
   margin: 10px 0;
+  align-self: flex-start;
 }
 
 .product-card .price-tag {
@@ -149,7 +166,7 @@ body {
 .sidebar-section {
   flex: 1;
 
-  min-height: 300px;
+  min-height: 600px;
   padding: 0 10px;
 
   box-shadow: -5px 0 10px 1px rgba(0, 0, 0, 0.2);
