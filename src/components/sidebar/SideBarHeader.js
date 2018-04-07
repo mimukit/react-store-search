@@ -1,11 +1,13 @@
 import React from 'react';
 
-const SideBarHeader = () => (
+const SideBarHeader = ({ cartItems, clearCart }) => (
   <div className="sidebar-header">
     <p>
       <span className="sidebar-title">Cart</span>
       <span style={{ float: 'right' }}>
-        <button disabled>Clear</button>
+        <button disabled={!cartItems.length} onClick={clearCart}>
+          Clear
+        </button>
       </span>
     </p>
   </div>

@@ -1,19 +1,19 @@
 import React from 'react';
 
+const renderItems = items => {
+  return items.map((item, i) => (
+    <tr key={`cart-item-${i + 1}`}>
+      <td>{`${i + 1}. ${item.title}`}</td>
+      <td>{`$${item.price / 100}`}</td>
+    </tr>
+  ));
+};
+
 const SideBarContent = ({ cartItems }) =>
   cartItems.length > 0 ? (
     <div className="sidebar-content-list">
       <table>
-        <tbody>
-          <tr>
-            <td>1. Product 1</td>
-            <td>$11.50</td>
-          </tr>
-          <tr>
-            <td>2. Product 2</td>
-            <td>$11.50</td>
-          </tr>
-        </tbody>
+        <tbody>{renderItems(cartItems)}</tbody>
       </table>
     </div>
   ) : (
