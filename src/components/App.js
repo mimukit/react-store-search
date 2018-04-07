@@ -10,9 +10,9 @@ const initialState = {
 class App extends Component {
   state = initialState;
 
-  addToCart = product => {
+  addToCart = item => {
     this.setState(prevState => ({
-      cartItems: [...prevState.cartItems, product],
+      cartItems: [...prevState.cartItems, item],
     }));
   };
 

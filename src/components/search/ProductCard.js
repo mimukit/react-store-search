@@ -1,14 +1,25 @@
 import React from 'react';
 
-const ProductCard = props => (
+const ProductCard = ({ title, price, image, addToCart }) => (
   <div className="product-card">
-    <span className="price-tag">{`${props.price}`}</span>
-    <img src={props.image} alt={props.title} />
+    <span className="price-tag">
+      {typeof price === 'number' ? `$${(price / 100).toFixed(2)}` : 'Unknown'}
+    </span>
+    <img src={image} alt={title} />
     <div className="product-card-content">
       <h4>
-        <b>{props.title}</b>
+        <b>{title}</b>
       </h4>
-      <button>+ Cart</button>
+      <button
+        onClick={() => {
+          addToCart({
+            title,
+            price,
+          });
+        }}
+      >
+        + Cart
+      </button>
     </div>
   </div>
 );

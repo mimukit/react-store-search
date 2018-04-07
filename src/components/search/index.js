@@ -66,6 +66,7 @@ class Search extends Component {
           onSearchSubmit={this.onSearchSubmit}
         />
         <SearchResult
+          addToCart={this.props.addToCart}
           isSearchSubmitted={this.state.isSearchSubmitted}
           searchResult={this.state.searchResult}
           isLoading={this.state.isLoading}
