@@ -24,28 +24,42 @@ class App extends Component {
 
   // Snapshot Management Methods
 
-  addSnapshot = params => {
-    this.snapshots = [...this.snapshots, this.state];
-    this.snapshotIndex++;
-
-    console.log(this.snapshots, this.snapshotIndex);
+  addSnapshot = () => {
+    if (!this.lastSnapshot()) {
+      this.snapshots = [
+        ...this.snapshots.splice(0, ++this.snapshotIndex),
+        this.state,
+      ];
+    } else {
+      this.snapshots = [...this.snapshots, this.state];
+      this.snapshotIndex++;
+    }
+    console.log(this.snapshotIndex, this.snapshots);
   };
 
-  prevSnapshot = params => {
-    this.snapshotIndex--;
+  prevSnapshot = () => {
+    if (!this.firstSnapshot()) {
+      this.snapshotIndex--;
 
-    this.setState(() => ({
-      ...this.snapshots[this.snapshotIndex],
-    }));
+      this.setState(() => ({
+        ...this.snapshots[this.snapshotIndex],
+      }));
+    }
   };
 
-  nextSnapshot = params => {
-    this.snapshotIndex++;
+  nextSnapshot = () => {
+    if (!this.lastSnapshot()) {
+      this.snapshotIndex++;
 
-    this.setState(() => ({
-      ...this.snapshots[this.snapshotIndex],
-    }));
+      this.setState(() => ({
+        ...this.snapshots[this.snapshotIndex],
+      }));
+    }
   };
+
+  firstSnapshot = () => this.snapshotIndex === 0;
+
+  lastSnapshot = () => this.snapshotIndex === this.snapshots.length - 1;
 
   // App Management Methods
 

@@ -42,6 +42,8 @@ Search.propTypes = {
   isSearchSubmitted: PropTypes.bool.isRequired,
   searchResult: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  prevSnapshot: PropTypes.func.isRequired,
+  nextSnapshot: PropTypes.func.isRequired,
 };
 
 export default Search;
