@@ -1,103 +1,214 @@
 /* Basic */
 
-html
-{
-    font-size: 62.5%;
+html {
+  font-size: 62.5%;
 }
 
-body
-{
-    font-family: sans-serif;
-    font-size: 1.4rem;
+body {
+  font-family: sans-serif;
+  font-size: 1.4rem;
 
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Layout */
 
-.container
-{
-    display: flex;
+.container {
+  display: flex;
 
-    box-sizing: border-box;
-    height: 100vh;
-    padding: 20px;
+  box-sizing: border-box;
+  height: 99vh;
 
-    border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 /* Search Section */
 
-.search-section
-{
-    flex: 2;
+.search-section {
+  flex: 2;
 
-    box-sizing: border-box;
+  box-sizing: border-box;
 
-    border: 1px solid green;
+  /* border: 1px solid green; */
 }
 
-.search-bar
-{
-    height: 50px;
+.search-bar {
+  z-index: 99;
 
-    text-align: center;
+  height: 50px;
+  margin-bottom: 8px;
+  padding-top: 10px;
 
-    border: 1px solid blueviolet;
+  text-align: center;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  /* border: 1px solid blueviolet; */
 }
 
-.search-bar input
-{
-    font-size: 1.6rem;
+.search-bar input {
+  font-size: 1.6rem;
 
-    padding: 3px;
+  padding: 3px;
 }
 
-.search-bar button
-{
-    font-size: 1.6rem;
+.search-bar button {
+  font-size: 1.6rem;
 
-    margin-left: 15px;
-    padding: 5px 10px;
+  margin-left: 15px;
+  padding: 5px 10px;
 
-    cursor: pointer;
+  cursor: pointer;
 
-    background: transparent;
+  background: transparent;
 }
 
-.search-result
-{
-    align-content: center;
+.search-result-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    height: calc(100% - 50px);
+  width: 100%;
+  height: calc(100% - 70px);
+  min-height: 500px;
 
-    border: 1px solid blueviolet;
+  /* border: 1px solid blueviolet; */
+}
+
+.search-result-empty p {
+  font-size: 2rem;
+  font-weight: bold;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.search-result {
+  display: flex;
+  overflow-y: auto;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  height: calc(100% - 70px);
+  min-height: 500px;
+
+  /* border: 1px solid blueviolet; */
+}
+
+/* Search Result */
+
+.product-card {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 27%;
+  min-width: 200px;
+  margin: 25px auto;
+
+  transition: 0.3s;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  align-self: center;
+
+  width: 100%;
+  width: 150px;
+  height: 150px;
+}
+
+.product-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.product-card-content {
+  padding: 2px 16px;
+}
+
+.product-card-content button {
+  margin: 10px 0;
+}
+
+.product-card .price-tag {
+  position: absolute;
+  right: 0;
+
+  display: inline-block;
+
+  padding: 5px;
+
+  color: #000;
+  background: #ffeaa7dd;
 }
 
 /* Sidebar Section */
 
-.sidebar-section
-{
+.sidebar-section {
+  flex: 1;
+
+  min-height: 300px;
+  padding: 0 10px;
+
+  box-shadow: -5px 0 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-header {
+  height: 60px;
+}
+
+.sidebar-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+.sidebar-content-list {
+  display: flex;
+  flex-direction: column;
+
+  height: calc(100% - 70px);
+
+  /* border: 1px solid blueviolet; */
+}
+
+.sidebar-content-list table {
+  width: 100%;
+}
+
+.sidebar-content-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: calc(100% - 70px);
+
+  /* border: 1px solid blueviolet; */
+}
+
+.sidebar-content-empty p {
+  font-weight: bold;
+
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Media Quries */
+
+@media only screen and (max-width: 500px) {
+  .container {
+    flex-direction: column;
+  }
+  .search-section {
     flex: 1;
-
-    border: 1px solid green;
+  }
+  .sidebar-section {
+    flex: 1;
+  }
 }
 
-.sidebar-header
-{
-    height: 50px;
-
-    text-align: center;
-
-    border: 1px solid blueviolet;
-}
-
-.sidebar-content
-{
-    align-content: center;
-
-    height: calc(100% - 50px);
-
-    border: 1px solid blueviolet;
+@media only screen and (min-width: 1000px) {
+  .search-section {
+    flex: 3;
+  }
 }
